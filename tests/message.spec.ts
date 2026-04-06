@@ -1,9 +1,10 @@
 import { test, expect } from '../lib/fixtures/pages.fixture';
+import { ENV } from '../lib/env'
 
 test('User successfully writes a message', async ({ webApp }) => {
   await webApp.loginPage.goto();
-  await webApp.loginPage.login("customer2@practicesoftwaretesting.com","welcome01");
-  await expect (webApp.accountPage.navMenu).toHaveText("Jack Howe");
+  await webApp.loginPage.login(ENV.USER_EMAIL,ENV.USER_PSWD);
+  await expect (webApp.accountPage.navMenu).toHaveText(ENV.USER_NAME);
 
   //Click on ContactMenu
   await webApp.accountPage.contactMenu.click();
