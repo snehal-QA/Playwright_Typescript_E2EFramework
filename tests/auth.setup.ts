@@ -4,7 +4,10 @@ import { ENV } from '../lib/env'
 import fs from 'fs'
 
 const authFile = path.resolve(process.cwd(), 'playwright/.auth/user.json');
+
 setup('authenticate user and save storage state', async () =>{
+    fs.mkdirSync(path.dirname(authFile), { recursive: true });
+
     const apiContext = await request.newContext({
         baseURL: ENV.BASE_API_URL,
     });
@@ -39,8 +42,6 @@ setup('authenticate user and save storage state', async () =>{
         },
         ],
     };
-
-    fs.mkdirSync(path.dirname(authFile), { recursive: true });
     fs.writeFileSync(authFile, JSON.stringify(storageState, null, 2));
     
     await apiContext.dispose();

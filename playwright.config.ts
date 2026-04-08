@@ -21,7 +21,6 @@ export default defineConfig({
   reporter: 'html',
   use: {
     baseURL: process.env.BASE_URL,
-    storageState: './playwright/.auth/user.json',
     testIdAttribute: 'data-test',
     trace: 'on',
     actionTimeout: 0,
