@@ -10,6 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       BASE_URL: ${{ vars.BASE_URL }}
+      BASE_API_URL: ${{vars.BASE_API_URL}}
       USER_NAME: ${{ vars.USER_NAME }}
       USER_EMAIL: ${{ secrets.USER_EMAIL }}
       USER_PSWD: ${{ secrets.USER_PSWD }}
