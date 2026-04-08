@@ -1,6 +1,13 @@
+function getEnv(key: string): string {
+    const value = process.env[key];
+    if(!value) throw new Error (`${key} is not set in .env file`);
+        return value;
+}
+
 export const ENV = {
-    BASE_URL: process.env.BASE_URL ?? (() => {throw new Error('BASE_URL not set')}) (),
-    USER_EMAIL: process.env.USER_EMAIL ?? (() => {throw new Error('USER_EMAIL not set')}) (),
-    USER_PSWD: process.env.USER_PSWD ?? (() => {throw new Error('USER_PSWD not set')}) (),
-    USER_NAME: process.env.USER_NAME ?? (() => {throw new Error('USER_NAME not set')}) (),
-};
+    BASE_URL: getEnv('BASE_URL'),
+    BASE_API_URL: getEnv('BASE_API_URL'),
+    USER_EMAIL: getEnv('USER_EMAIL'),
+    USER_PSWD: getEnv('USER_PSWD'),
+    USER_NAME: getEnv('USER_NAME'),
+}

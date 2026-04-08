@@ -19,13 +19,10 @@ export default defineConfig({
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
-    /* Base URL to use in actions like `await page.goto('')`. */
     baseURL: process.env.BASE_URL,
+    storageState: './playwright/.auth/user.json',
     testIdAttribute: 'data-test',
-
-    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on',
     actionTimeout: 0,
     video: 'retain-on-failure'
@@ -34,8 +31,17 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'setup',
+      testMatch: /.*auth\.setup\.ts/,
+      use: { storageState: undefined },
+    },
+    {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      dependencies: ['setup'],
+      use: { 
+        ...devices['Desktop Chrome'], 
+        storageState: './playwright/.auth/user.json'
+      },
     },
 
     // {

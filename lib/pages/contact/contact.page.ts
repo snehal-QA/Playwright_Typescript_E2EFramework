@@ -15,7 +15,7 @@ export class ContactPage{
     }
 
     async goto(){
-        this.page.goto("/contact")
+        await this.page.goto("/contact")
     }
 
     // async selectSubject(subjectName: string){
